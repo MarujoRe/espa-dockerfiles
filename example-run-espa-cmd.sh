@@ -8,7 +8,7 @@ docker run --rm --tty \
   --volume <HOST>/input-data:/home/espa/input-data:ro \
   --volume $HOME/.usgs:/home/espa/.usgs:ro \
   --workdir /home/espa \
-  espa.centos.science:b2.11.3 `id -g` `id -u` \
+  espa.centos.science:b2.11.4 `id -g` `id -u` \
   cli.py \
     --order-id frog \
     --input-product-id LE70390372003148EDC00 \

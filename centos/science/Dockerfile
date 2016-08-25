@@ -1,4 +1,4 @@
-FROM espa.centos.external:0.3.0
+FROM espa.centos.external:b2.11.4
 
 
 MAINTAINER USGS LSRD http://eros.usgs.gov
@@ -111,7 +111,7 @@ RUN REPO_NAME=espa-elevation \
 
 
 RUN REPO_NAME=espa-processing \
-    && REPO_TAG=espa-2.11.3-release \
+    && REPO_TAG=bridge_dev_v2.11.4 \
     && cd $SRC_DIR \
     && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
