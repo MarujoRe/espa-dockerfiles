@@ -39,16 +39,17 @@ RUN REPO_NAME=espa-product-formatter \
     && rm -rf ${REPO_NAME}
 
 
-RUN REPO_NAME=espa-spectral-indices \
-    && REPO_TAG=spectral_indices_v2.5.0 \
-    && cd $SRC_DIR \
-    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
-    && cd ${REPO_NAME} \
-    && git checkout ${REPO_TAG} \
-    && make BUILD_STATIC=yes \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf ${REPO_NAME}
+# NOT NEEDED FOR BRIDGE
+#RUN REPO_NAME=espa-spectral-indices \
+#    && REPO_TAG=spectral_indices_v2.5.0 \
+#    && cd $SRC_DIR \
+#    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+#    && cd ${REPO_NAME} \
+#    && git checkout ${REPO_TAG} \
+#    && make BUILD_STATIC=yes \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf ${REPO_NAME}
 
 
 RUN REPO_NAME=espa-cloud-masking \
@@ -63,16 +64,17 @@ RUN REPO_NAME=espa-cloud-masking \
     && rm -rf ${REPO_NAME}
 
 
-RUN REPO_NAME=espa-surface-water-extent \
-    && REPO_TAG=2016_Aug \
-    && cd $SRC_DIR \
-    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
-    && cd ${REPO_NAME} \
-    && git checkout ${REPO_TAG} \
-    && make BUILD_STATIC=yes \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf ${REPO_NAME}
+# NOT NEEDED FOR BRIDGE
+#RUN REPO_NAME=espa-surface-water-extent \
+#    && REPO_TAG=2016_Aug \
+#    && cd $SRC_DIR \
+#    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+#    && cd ${REPO_NAME} \
+#    && git checkout ${REPO_TAG} \
+#    && make BUILD_STATIC=yes \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf ${REPO_NAME}
 
 
 RUN REPO_NAME=espa-surface-reflectance \
@@ -87,27 +89,29 @@ RUN REPO_NAME=espa-surface-reflectance \
     && rm -rf ${REPO_NAME}
 
 
-RUN REPO_NAME=espa-land-surface-temperature \
-    && REPO_TAG=2016_Aug \
-    && cd $SRC_DIR \
-    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
-    && cd ${REPO_NAME} \
-    && git checkout ${REPO_TAG} \
-    && make BUILD_STATIC=yes \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf ${REPO_NAME}
+# NOT NEEDED FOR BRIDGE
+#RUN REPO_NAME=espa-land-surface-temperature \
+#    && REPO_TAG=2016_Aug \
+#    && cd $SRC_DIR \
+#    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+#    && cd ${REPO_NAME} \
+#    && git checkout ${REPO_TAG} \
+#    && make BUILD_STATIC=yes \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf ${REPO_NAME}
 
 
-RUN REPO_NAME=espa-elevation \
-    && REPO_TAG=v2.0.1 \
-    && cd $SRC_DIR \
-    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
-    && cd ${REPO_NAME} \
-    && git checkout ${REPO_TAG} \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf ${REPO_NAME}
+# NOT NEEDED FOR BRIDGE
+#RUN REPO_NAME=espa-elevation \
+#    && REPO_TAG=v2.0.1 \
+#    && cd $SRC_DIR \
+#    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+#    && cd ${REPO_NAME} \
+#    && git checkout ${REPO_TAG} \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf ${REPO_NAME}
 
 
 RUN REPO_NAME=espa-processing \
