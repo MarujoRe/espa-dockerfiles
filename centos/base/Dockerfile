@@ -4,7 +4,7 @@ FROM centos:7.2.1511
 MAINTAINER USGS LSRD http://eros.usgs.gov
 
 
-LABEL description="CentOS with updated repo and python virtualenv"
+LABEL description="CentOS with updated repo and python packages"
 
 
 # Update the OS packages to the latest versions

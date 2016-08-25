@@ -8,7 +8,7 @@ docker run --rm --tty \
   --volume <HOST>/input-data:/home/espa/input-data:ro \
   --volume $HOME/.usgs:/home/espa/.usgs:ro \
   --workdir /home/espa \
-  espa.centos.science:0.2.0 `id -g` `id -u` \
+  espa.centos.science:b2.11.3 `id -g` `id -u` \
   cli.py \
     --order-id frog \
     --input-product-id LE70390372003148EDC00 \
@@ -17,16 +17,5 @@ docker run --rm --tty \
     --input-url file:///home/espa/input-data/LE7/LE70390372003148EDC00.tar.gz \
     --include-top-of-atmosphere \
     --include-brightness-temperature \
-    --include-sr-ndvi \
+    --include-surface-reflectance \
     --include-cfmask \
-    --include-surface-water-extent \
-    --include-statistics \
-    --pixel-size 60 \
-    --extent-minx 557300.0 \
-    --extent-maxx 642200.0 \
-    --extent-miny 3596000.0 \
-    --extent-maxy 3708200.0 \
-    --resample-method cubic \
-    --target-projection utm \
-    --utm-north-south north \
-    --utm-zone 10

@@ -1,6 +1,6 @@
 
 TAG_PREFIX = espa
-TAG_VERSION = 0.3.0
+TAG_VERSION = b2.11.3
 
 .PHONY: all clean clean.containers clean.images build.base build.external build.science centos.base centos.external centos.science base external science
 
