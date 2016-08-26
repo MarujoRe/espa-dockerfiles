@@ -15,7 +15,6 @@ RUN yum group install -y "Development Tools" \
         freetype-devel \
         glibc-static \
         libcurl-devel \
-        libidn-devel \
         libgfortran-static \
         libquadmath-static \
         perl-ExtUtils-MakeMaker \
@@ -45,8 +44,7 @@ RUN cd /usr/local/src \
 
 
 # Source and installation locations
-ENV PREFIX=/usr/local \
-    SRC_DIR=/usr/local/src \
+ENV SRC_DIR=/usr/local/src \
     ZLIB_PREFIX=/usr/local \
     XZ_PREFIX=/usr/local \
     SZIP_PREFIX=/usr/local \
@@ -54,8 +52,8 @@ ENV PREFIX=/usr/local \
     FREETYPE2_PREFIX=/usr/local \
     XML2_PREFIX=/usr/local \
     XSLT_PREFIX=/usr/local \
-    IDN_PREFIX=/usr/local/idn \
-    CURL_PREFIX=/usr/local/curl \
+    IDN_PREFIX=/usr/local \
+    CURL_PREFIX=/usr/local \
     JPEG_PREFIX=/usr/local \
     JBIG_PREFIX=/usr/local \
     TIFF_PREFIX=/usr/local \
@@ -170,7 +168,8 @@ RUN cd $SRC_DIR \
 
 # Install libxml2
 COPY external_tools/libxml2-2.9.3.tar.gz $SRC_DIR
-RUN cd $SRC_DIR \
+RUN source /python-env/bin/activate \
+    && cd $SRC_DIR \
     && tar -xvf libxml2-2.9.3.tar.gz \
     && cd libxml2-2.9.3 \
     && ./configure --prefix=$XML2_PREFIX \
@@ -187,7 +186,8 @@ RUN cd $SRC_DIR \
 
 # Install libxslt
 COPY external_tools/libxslt-1.1.28.tar.gz $SRC_DIR
-RUN cd $SRC_DIR \
+RUN source /python-env/bin/activate \
+    && cd $SRC_DIR \
     && tar -xvf libxslt-1.1.28.tar.gz \
     && cd libxslt-1.1.28 \
     && ./configure --prefix=$XSLT_PREFIX \
@@ -289,31 +289,31 @@ RUN cd $SRC_DIR \
 
 
 # Install curl
-COPY external_tools/curl-7.48.0.tar.gz $SRC_DIR
-RUN cd $SRC_DIR \
-    && tar -xvf curl-7.48.0.tar.gz \
-    && cd curl-7.48.0 \
-    && ./configure --prefix=$CURL_PREFIX \
-        --enable-shared \
-        --enable-static \
-    && make \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf curl-7.48.0 curl-7.48.0.tar.gz
+#COPY external_tools/curl-7.48.0.tar.gz $SRC_DIR
+#RUN cd $SRC_DIR \
+#    && tar -xvf curl-7.48.0.tar.gz \
+#    && cd curl-7.48.0 \
+#    && ./configure --prefix=$CURL_PREFIX \
+#        --enable-shared \
+#        --enable-static \
+#    && make \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf curl-7.48.0 curl-7.48.0.tar.gz
 
 
 # Install idn
-COPY external_tools/libidn-1.32.tar.gz $SRC_DIR
-RUN cd $SRC_DIR \
-    && tar -xvf libidn-1.32.tar.gz \
-    && cd libidn-1.32 \
-    && ./configure --prefix=$IDN_PREFIX \
-        --enable-shared \
-        --enable-static \
-    && make \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf libidn-1.32 libidn-1.32.tar.gz
+#COPY external_tools/libidn-1.32.tar.gz $SRC_DIR
+#RUN cd $SRC_DIR \
+#    && tar -xvf libidn-1.32.tar.gz \
+#    && cd libidn-1.32 \
+#    && ./configure --prefix=$IDN_PREFIX \
+#        --enable-shared \
+#        --enable-static \
+#    && make \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf libidn-1.32 libidn-1.32.tar.gz
 
 
 # Install HDF4
@@ -356,19 +356,20 @@ RUN cd $SRC_DIR \
 
 
 # Install netcdf-4
-COPY external_tools/netcdf-4.4.0.tar.gz $SRC_DIR
-RUN cd $SRC_DIR \
-    && tar -xvf netcdf-4.4.0.tar.gz \
-    && cd netcdf-4.4.0 \
-    && env CPPFLAGS="-I/usr/local/curl/include" LDFLAGS="-L/usr/local/curl/lib" \
-        ./configure --prefix=$NETCDF4_PREFIX \
-        --enable-netcdf-4 \
-        --enable-shared \
-        --enable-static \
-    && make -j5 \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf netcdf-4.4.0 netcdf-4.4.0.tar.gz
+#    && env CPPFLAGS="-I/usr/local/curl/include" LDFLAGS="-L/usr/local/curl/lib" \
+#
+#COPY external_tools/netcdf-4.4.0.tar.gz $SRC_DIR
+#RUN cd $SRC_DIR \
+#    && tar -xvf netcdf-4.4.0.tar.gz \
+#    && cd netcdf-4.4.0 \
+#    && ./configure --prefix=$NETCDF4_PREFIX \
+#        --enable-netcdf-4 \
+#        --enable-shared \
+#        --enable-static \
+#    && make -j5 \
+#    && make install \
+#    && cd $SRC_DIR \
+#    && rm -rf netcdf-4.4.0 netcdf-4.4.0.tar.gz
 
 
 # Install HDFEOS2
@@ -393,7 +394,9 @@ RUN cd $SRC_DIR \
 # Python environment setup
 # GDAL is installed into python through the below installation, because Numpy
 # must be installed into python before building GDAL
-RUN pip install \
+RUN source /python-env/bin/activate \
+    && pip install --upgrade pip \
+    && pip install \
         --global-option=build_ext \
         --global-option="-L/usr/local/lib" \
         --global-option="-I/usr/local/include" \
@@ -407,7 +410,8 @@ RUN pip install \
 
 # Install GDAL
 COPY external_tools/gdal-1.11.4.tar.gz $SRC_DIR
-RUN cd $SRC_DIR \
+RUN source /python-env/bin/activate \
+    && cd $SRC_DIR \
     && tar -xvf gdal-1.11.4.tar.gz \
     && cd gdal-1.11.4 \
     && ./configure --prefix=$GDAL_PREFIX \
