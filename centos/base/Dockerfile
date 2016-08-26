@@ -20,7 +20,7 @@ RUN yum install -y \
 
 # Initial Python Configuration
 RUN yum install -y \
-        python-virtualenv \
-    && cd / \
-    && virtualenv python-env \
+        python-pip \
+        python-devel \
+    && pip install --upgrade pip \
     && yum clean metadata
