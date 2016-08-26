@@ -168,8 +168,7 @@ RUN cd $SRC_DIR \
 
 # Install libxml2
 COPY external_tools/libxml2-2.9.3.tar.gz $SRC_DIR
-RUN source /python-env/bin/activate \
-    && cd $SRC_DIR \
+RUN cd $SRC_DIR \
     && tar -xvf libxml2-2.9.3.tar.gz \
     && cd libxml2-2.9.3 \
     && ./configure --prefix=$XML2_PREFIX \
@@ -186,8 +185,7 @@ RUN source /python-env/bin/activate \
 
 # Install libxslt
 COPY external_tools/libxslt-1.1.28.tar.gz $SRC_DIR
-RUN source /python-env/bin/activate \
-    && cd $SRC_DIR \
+RUN cd $SRC_DIR \
     && tar -xvf libxslt-1.1.28.tar.gz \
     && cd libxslt-1.1.28 \
     && ./configure --prefix=$XSLT_PREFIX \
@@ -394,8 +392,7 @@ RUN cd $SRC_DIR \
 # Python environment setup
 # GDAL is installed into python through the below installation, because Numpy
 # must be installed into python before building GDAL
-RUN source /python-env/bin/activate \
-    && pip install --upgrade pip \
+RUN pip install --upgrade pip \
     && pip install \
         --global-option=build_ext \
         --global-option="-L/usr/local/lib" \
@@ -410,8 +407,7 @@ RUN source /python-env/bin/activate \
 
 # Install GDAL
 COPY external_tools/gdal-1.11.4.tar.gz $SRC_DIR
-RUN source /python-env/bin/activate \
-    && cd $SRC_DIR \
+RUN cd $SRC_DIR \
     && tar -xvf gdal-1.11.4.tar.gz \
     && cd gdal-1.11.4 \
     && ./configure --prefix=$GDAL_PREFIX \
