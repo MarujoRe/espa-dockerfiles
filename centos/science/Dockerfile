@@ -19,8 +19,7 @@ ENV PREFIX=/usr/local \
 
 # ----------------------------------------------------------------------------
 # Install the espa-python-library
-RUN source /python-env/bin/activate \
-    && pip install --upgrade \
+RUN pip install \
         git+https://github.com/USGS-EROS/espa-python-library.git@v1.0.1#espa
 
 
@@ -114,9 +113,9 @@ RUN REPO_NAME=espa-surface-reflectance \
 #    && cd $SRC_DIR \
 #    && rm -rf ${REPO_NAME}
 
-RUN echo "Codename: bull-frog"
+RUN echo "Codename: carbon-steel"
 RUN REPO_NAME=espa-processing \
-    && REPO_TAG=dev_v2.12.0 \
+    && REPO_TAG=bridge_dev_v2.11.4 \
     && cd $SRC_DIR \
     && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
