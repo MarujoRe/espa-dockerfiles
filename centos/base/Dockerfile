@@ -1,7 +1,7 @@
 FROM centos:7.2.1511
 
 
-MAINTAINER USGS LSRD http://eros.usgs.gov
+MAINTAINER USGS EROS LSRD http://eros.usgs.gov
 
 
 LABEL description="CentOS with updated repo and python packages"
