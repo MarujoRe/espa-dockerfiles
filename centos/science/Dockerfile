@@ -1,10 +1,10 @@
 FROM espa.centos.external:b2.11.4
 
 
-MAINTAINER USGS LSRD http://eros.usgs.gov
+MAINTAINER USGS EROS LSRD http://eros.usgs.gov
 
 
-LABEL description="Science processing software we use within ESPA-Product-Fulfillment."
+LABEL description="Adds the science processing applications and setup we use for ESPA-Product-Fulfillment."
 
 
 # ----------------------------------------------------------------------------
@@ -126,9 +126,8 @@ RUN REPO_NAME=espa-processing \
 
 
 # ----------------------------------------------------------------------------
-# Add an entrypoint so that we execute the specified application as the
-# specified user (THE_USER specified below)
-ENV THE_USER=espa
+# Add an entrypoint so that we can do some internal setup and then execute the
+# specified application
 COPY centos/science/science-entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

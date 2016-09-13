@@ -1,7 +1,7 @@
 FROM espa.centos.base:b2.11.4
 
 
-MAINTAINER USGS LSRD http://eros.usgs.gov
+MAINTAINER USGS EROS LSRD http://eros.usgs.gov
 
 
 LABEL description="External software we use installed into the image as well as additional CENTOS repo packages required for building and executing ESPA-Product-Fulfillment."
@@ -124,15 +124,8 @@ ENV ZLIBINC=$ZLIB_PREFIX/include \
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
 
-# Install gosu so that the entrypoint script (installed later) can change the
-# specified user.  "gosu is used for easy step-down from root"
-COPY external_tools/gosu-amd64 /usr/local/bin/gosu
-RUN chmod +x /usr/local/bin/gosu
-
-
 # Additional tools provided by the OS required for ESPA
 RUN yum install -y \
-        sudo \
         wget \
         wgrib \
     && yum clean metadata
