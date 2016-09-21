@@ -8,19 +8,21 @@ LABEL description="Adds the science processing applications and setup we use for
 
 
 # ----------------------------------------------------------------------------
+# Install the espa-python-library
+RUN pip install \
+        git+https://github.com/USGS-EROS/espa-python-library.git@v1.0.1#espa
+
+
+# ----------------------------------------------------------------------------
 # Configuration of environment variables to reduce intermediate docker image
 # generation.
 # ----------------------------------------------------------------------------
 
 ENV PREFIX=/usr/local \
     ESPAINC=/usr/local/include \
-    ESPALIB=/usr/local/lib
-
-
-# ----------------------------------------------------------------------------
-# Install the espa-python-library
-RUN pip install \
-        git+https://github.com/USGS-EROS/espa-python-library.git@v1.0.1#espa
+    ESPALIB=/usr/local/lib \
+    ESPA_LEVEL2QA_INC=/usr/local/include \
+    ESPA_LEVEL2QA_LIB=/usr/local/lib
 
 
 # ----------------------------------------------------------------------------
@@ -29,6 +31,18 @@ RUN pip install \
 
 RUN REPO_NAME=espa-product-formatter \
     && REPO_TAG=product_formatter_v1.8.0 \
+    && cd $SRC_DIR \
+    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+    && cd ${REPO_NAME} \
+    && git checkout ${REPO_TAG} \
+    && make BUILD_STATIC=yes \
+    && make install \
+    && cd $SRC_DIR \
+    && rm -rf ${REPO_NAME}
+
+
+RUN REPO_NAME=espa-l2qa-tools \
+    && REPO_TAG=dev_v1.0.0 \
     && cd $SRC_DIR \
     && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
@@ -65,20 +79,20 @@ RUN REPO_NAME=espa-cloud-masking \
 
 
 # NOT NEEDED FOR BRIDGE
-#RUN REPO_NAME=espa-surface-water-extent \
-#    && REPO_TAG=2016_Aug \
-#    && cd $SRC_DIR \
-#    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
-#    && cd ${REPO_NAME} \
-#    && git checkout ${REPO_TAG} \
-#    && make BUILD_STATIC=yes \
-#    && make install \
-#    && cd $SRC_DIR \
-#    && rm -rf ${REPO_NAME}
+RUN REPO_NAME=espa-surface-water-extent \
+    && REPO_TAG=bridge_dev_v2.11.4 \
+    && cd $SRC_DIR \
+    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+    && cd ${REPO_NAME} \
+    && git checkout ${REPO_TAG} \
+    && make BUILD_STATIC=yes \
+    && make install \
+    && cd $SRC_DIR \
+    && rm -rf ${REPO_NAME}
 
 
 RUN REPO_NAME=espa-surface-reflectance \
-    && REPO_TAG=surface_reflectance_aug2016 \
+    && REPO_TAG=bridge_dev_v2.11.4 \
     && cd $SRC_DIR \
     && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
