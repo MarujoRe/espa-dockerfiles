@@ -127,7 +127,7 @@ RUN REPO_NAME=espa-surface-reflectance \
 #    && cd $SRC_DIR \
 #    && rm -rf ${REPO_NAME}
 
-RUN echo "Codename: carbon-steel"
+RUN echo "Codename: licorice-snaps"
 RUN REPO_NAME=espa-processing \
     && REPO_TAG=bridge_dev_v2.11.4 \
     && cd $SRC_DIR \
