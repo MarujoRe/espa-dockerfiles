@@ -42,7 +42,7 @@ RUN REPO_NAME=espa-product-formatter \
 
 
 RUN REPO_NAME=espa-l2qa-tools \
-    && REPO_TAG=dev_v1.0.0 \
+    && REPO_TAG=l2qa_tools_v1.0.0 \
     && cd $SRC_DIR \
     && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
@@ -127,7 +127,7 @@ RUN REPO_NAME=espa-surface-reflectance \
 #    && cd $SRC_DIR \
 #    && rm -rf ${REPO_NAME}
 
-RUN echo "Codename: licorice-snaps"
+RUN echo "Codename: filebeat-kibana"
 RUN REPO_NAME=espa-processing \
     && REPO_TAG=bridge_dev_v2.11.4 \
     && cd $SRC_DIR \
