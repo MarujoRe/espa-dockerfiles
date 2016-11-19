@@ -88,9 +88,9 @@ RUN REPO_NAME=espa-surface-water-extent \
 
 
 RUN REPO_NAME=espa-surface-reflectance \
-    && REPO_TAG=dev_jan2017 \
+    && REPO_TAG=aux_tools_repair \
     && cd $SRC_DIR \
-    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+    && git clone https://github.com/russelhowe/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
     && git checkout ${REPO_TAG} \
     && make BUILD_STATIC=yes \
