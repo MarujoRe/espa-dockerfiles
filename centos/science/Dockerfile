@@ -93,8 +93,8 @@ RUN REPO_NAME=espa-surface-reflectance \
     && git clone https://github.com/russelhowe/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
     && git checkout ${REPO_TAG} \
-    && make BUILD_STATIC=yes \
-    && make install \
+    && make BUILD_STATIC=yes all-lasrc all-lasrc-aux \
+    && make install-lasrc install-lasrc-aux \
     && cd $SRC_DIR \
     && rm -rf ${REPO_NAME}
 
