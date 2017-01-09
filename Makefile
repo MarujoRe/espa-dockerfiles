@@ -53,10 +53,10 @@ build.bridge:
 centos.base:
 	@SYSTEM=centos make build.base
 
-centos.external:
+centos.external: centos.base
 	@SYSTEM=centos make build.external
 
-centos.science:
+centos.science: centos.external
 	@SYSTEM=centos make build.science
 
 centos.bridge:
