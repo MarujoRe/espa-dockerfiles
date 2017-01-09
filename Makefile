@@ -2,7 +2,7 @@
 TAG_PREFIX = espa
 TAG_VERSION = 2.13.0
 
-.PHONY: all clean clean.containers clean.images build.base build.external build.science build.bridge centos.base centos.external centos.science centos.bridge base external science bridge
+.PHONY: all clean clean.containers clean.images build.base build.external build.science centos.base centos.external centos.science base external science
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # General targets
@@ -40,12 +40,6 @@ build.science:
 	@docker tag $(TAG_PREFIX)/science \
         $(TAG_PREFIX)/science:$(TAG_VERSION)
 
-build.bridge:
-	@docker build -t $(TAG_PREFIX)/science \
-         -f $(SYSTEM)/bridge/Dockerfile .
-	@docker tag $(TAG_PREFIX)/bridge \
-        $(TAG_PREFIX)/bridge:$(TAG_VERSION)
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # CentOS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,9 +53,6 @@ centos.external: centos.base
 centos.science: centos.external
 	@SYSTEM=centos make build.science
 
-centos.bridge:
-	@SYSTEM=centos make build.bridge
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Shortcuts
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,4 +60,3 @@ centos.bridge:
 base: centos.base
 external: centos.external
 science: centos.science
-bridge: centos.bridge
